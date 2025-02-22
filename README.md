@@ -5,9 +5,10 @@ nosotros y por el bien del planeta.
 
 
 # funcionalidades clave
-- calculadora de impacto ambiental: cuenta con un formulario donde va a permitir ingresar datos sobre el uso de varios materiales y fuentes de energia para calcular la huella de
-carbono de dicho material
--test de ahorro: esta ruta mostrara distintas imagenes en base a su seleccion que le brindara consejos sugerencias o se le felicitara si tiene buena conciencia en cuanto al
+- calculadora de impacto ambiental: cuenta con un formulario donde va a permitir ingresar datos sobre el uso de varios materiales y
+fuentes de energia para calcular la huella decarbono de dicho material
+- test de ahorro: esta ruta mostrara distintas imagenes en base a su seleccion que le brindara consejos sugerencias o se le
+felicitara si tiene buena conciencia en cuanto al
 ahorro
 
 # tecnologias claves
