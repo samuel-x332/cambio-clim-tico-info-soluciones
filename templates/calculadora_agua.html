@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Agua - Ecolator</title>
+    <link rel="stylesheet" href="static\css\styles.css">
+</head>
+<body>
+    <header>
+        <h1>Calculadora de Consumo de Agua</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Inicio</a></li>
+                <li><a href="{{ url_for('calculadora_energia') }}">Calculadora de Energía</a></li>
+                <li><a href="{{ url_for('comparador_energia') }}">Comparador de Energía</a></li>
+                <li><a href="{{ url_for('test_ambiental') }}">Test Ambiental</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Calcula tu consumo de agua diario</h2>
+        <p>Ingresa la cantidad de veces que realizas las siguientes actividades al día.</p>
+        
+        <form id="waterForm">
+            <div class="input-group">
+                <label for="duchas">Duchas diarias:</label>
+                <input type="number" id="duchas" name="duchas" min="0">
+            </div>
+            
+            <div class="input-group">
+                <label for="lavado_manos">Veces que te lavas las manos:</label>
+                <input type="number" id="lavado_manos" name="lavado_manos" min="0">
+            </div>
+            
+            <div class="input-group">
+                <label for="descargas_wc">Descargas del inodoro:</label>
+                <input type="number" id="descargas_wc" name="descargas_wc" min="0">
+            </div>
+            
+            <div class="input-group">
+                <label for="lavado_platos">Veces que lavas platos:</label>
+                <input type="number" id="lavado_platos" name="lavado_platos" min="0">
+            </div>
+
+            <button type="button" onclick="calcularAgua()">Calcular Consumo</button>
+        </form>
+
+        <h3>Resultado:</h3>
+        <p id="resultado_agua"></p>
+        <ul id="consejos_agua"></ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ecolator - Conciencia Ambiental</p>
+    </footer>
+
+    <script>
+        function calcularAgua() {
+            let duchas = parseInt(document.getElementById('duchas').value) || 0;
+            let lavadoManos = parseInt(document.getElementById('lavado_manos').value) || 0;
+            let descargasWC = parseInt(document.getElementById('descargas_wc').value) || 0;
+            let lavadoPlatos = parseInt(document.getElementById('lavado_platos').value) || 0;
+
+            // Promedios de consumo (litros por actividad)
+            let consumoTotal = (duchas * 50) + (lavadoManos * 2) + (descargasWC * 6) + (lavadoPlatos * 10);
+            document.getElementById('resultado_agua').textContent = `Tu consumo aproximado es de ${consumoTotal.toFixed(2)} litros al día.`;
+
+            let consejos = [];
+            if (duchas > 2) consejos.push("Reduce el tiempo de ducha a menos de 5 minutos para ahorrar agua.");
+            if (lavadoManos > 10) consejos.push("Cierra la llave mientras te enjabonas las manos.");
+            if (descargasWC > 5) consejos.push("Usa sistemas de doble descarga para reducir el consumo de agua.");
+            if (lavadoPlatos > 3) consejos.push("Llena el fregadero antes de lavar platos en lugar de dejar el grifo abierto.");
+
+            let listaConsejos = document.getElementById('consejos_agua');
+            listaConsejos.innerHTML = "";
+            consejos.forEach(consejo => {
+                let li = document.createElement('li');
+                li.textContent = consejo;
+                listaConsejos.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

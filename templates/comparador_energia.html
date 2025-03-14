@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Energía - Ecolator</title>
+    <link rel="stylesheet" href="static\css\styles.css">
+</head>
+<body>
+    <header>
+        <h1>Comparador de Energía</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Inicio</a></li>
+                <li><a href="{{ url_for('calculadora_energia') }}">Calculadora de Energía</a></li>
+                <li><a href="{{ url_for('calculadora_agua') }}">Calculadora de Agua</a></li>
+                <li><a href="{{ url_for('test_ambiental') }}">Test Ambiental</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Compara el consumo entre energía convencional y renovable</h2>
+        <p>Ingresa tu consumo mensual en kWh y descubre la diferencia entre fuentes de energía.</p>
+        
+        <form id="energyComparisonForm">
+            <div class="input-group">
+                <label for="consumo">Consumo mensual (kWh):</label>
+                <input type="number" id="consumo" name="consumo" min="0" required>
+            </div>
+
+            <button type="button" onclick="compararEnergia()">Comparar Energía</button>
+        </form>
+
+        <h3>Resultados:</h3>
+        <p id="resultado_energia"></p>
+
+        <div class="energy-comparison">
+            <h4>Energía Convencional</h4>
+            <p id="convencional"></p>
+        </div>
+
+        <div class="energy-comparison">
+            <h4>Energía Renovable</h4>
+            <p id="renovable"></p>
+        </div>
+
+        <h3>Impacto Ambiental</h3>
+        <ul id="impacto"></ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ecolator - Conciencia Ambiental</p>
+    </footer>
+
+    <script>
+        function compararEnergia() {
+            let consumo = parseFloat(document.getElementById('consumo').value) || 0;
+
+            if (consumo <= 0) {
+                document.getElementById('resultado_energia').textContent = "Por favor, ingresa un valor válido.";
+                return;
+            }
+
+            let emisionesConvencional = consumo * 0.4; // 0.4 kg CO₂ por kWh
+            let emisionesRenovable = consumo * 0.02; // 0.02 kg CO₂ por kWh en energía limpia
+
+            document.getElementById('convencional').textContent = `Tu consumo generaría aproximadamente ${emisionesConvencional.toFixed(2)} kg de CO₂ si usas energía convencional.`;
+            document.getElementById('renovable').textContent = `Si usaras energía renovable, solo generarías ${emisionesRenovable.toFixed(2)} kg de CO₂.`;
+
+            let impactoLista = document.getElementById('impacto');
+            impactoLista.innerHTML = "";
+
+            let diferencia = emisionesConvencional - emisionesRenovable;
+            if (diferencia > 5) {
+                impactoLista.innerHTML += "<li>Cambiar a energía renovable reduciría significativamente tu huella de carbono.</li>";
+            }
+            if (diferencia > 10) {
+                impactoLista.innerHTML += "<li>Equivalente a plantar varios árboles al año para compensar el CO₂ generado.</li>";
+            }
+            if (diferencia > 20) {
+                impactoLista.innerHTML += "<li>Un cambio a energías limpias haría una gran diferencia en la reducción del cambio climático.</li>";
+            }
+        }
+    </script>
+</body>
+</html>

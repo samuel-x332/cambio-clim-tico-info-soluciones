@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Ambiental - Ecolator</title>
+    <link rel="stylesheet" href="static\css\styles.css">
+</head>
+<body>
+    <header>
+        <h1>Test Ambiental</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h2>Descubre qué tan ecológico eres</h2>
+        <form id="testForm">
+            <div class="pregunta">
+                <p>1. ¿Cuántos litros de agua consumes diariamente?</p>
+                <input type="radio" name="q1" value="bajo"> Menos de 50L<br>
+                <input type="radio" name="q1" value="medio"> Entre 50L y 100L<br>
+                <input type="radio" name="q1" value="alto"> Más de 100L
+            </div>
+            
+            <div class="pregunta">
+                <p>2. ¿Cuántas veces a la semana usas transporte público o bicicleta?</p>
+                <input type="radio" name="q2" value="alto"> Casi siempre<br>
+                <input type="radio" name="q2" value="medio"> Algunas veces<br>
+                <input type="radio" name="q2" value="bajo"> Casi nunca
+            </div>
+            
+            <div class="pregunta">
+                <p>3. ¿Separás los residuos reciclables?</p>
+                <input type="radio" name="q3" value="alto"> Siempre<br>
+                <input type="radio" name="q3" value="medio"> A veces<br>
+                <input type="radio" name="q3" value="bajo"> Nunca
+            </div>
+            
+            <div class="pregunta">
+                <p>4. ¿Usas bolsas reutilizables cuando compras?</p>
+                <input type="radio" name="q4" value="alto"> Siempre<br>
+                <input type="radio" name="q4" value="medio"> A veces<br>
+                <input type="radio" name="q4" value="bajo"> Nunca
+            </div>
+            
+            <div class="pregunta">
+                <p>5. ¿Consumes productos con envases reciclables?</p>
+                <input type="radio" name="q5" value="alto"> Siempre<br>
+                <input type="radio" name="q5" value="medio"> A veces<br>
+                <input type="radio" name="q5" value="bajo"> Nunca
+            </div>
+            
+            <div class="pregunta">
+                <p>6. ¿Cuánto tiempo dejas encendidas las luces innecesariamente?</p>
+                <input type="radio" name="q6" value="bajo"> Nunca las dejo encendidas<br>
+                <input type="radio" name="q6" value="medio"> A veces me olvido<br>
+                <input type="radio" name="q6" value="alto"> Muchas veces las dejo encendidas
+            </div>
+            
+            <div class="pregunta">
+                <p>7. ¿Cuántas veces a la semana comes carne?</p>
+                <input type="radio" name="q7" value="bajo"> 0-1 veces<br>
+                <input type="radio" name="q7" value="medio"> 2-4 veces<br>
+                <input type="radio" name="q7" value="alto"> 5 o más veces
+            </div>
+            
+            <div class="pregunta">
+                <p>8. ¿Tienes electrodomésticos eficientes (certificación energética)?</p>
+                <input type="radio" name="q8" value="alto"> Sí, todos<br>
+                <input type="radio" name="q8" value="medio"> Algunos<br>
+                <input type="radio" name="q8" value="bajo"> Ninguno
+            </div>
+            
+            <div class="pregunta">
+                <p>9. ¿Cuánto plástico desechable utilizas diariamente?</p>
+                <input type="radio" name="q9" value="bajo"> Casi nada<br>
+                <input type="radio" name="q9" value="medio"> Algunas veces<br>
+                <input type="radio" name="q9" value="alto"> Muchas veces
+            </div>
+            
+            <button type="button" onclick="calcularResultados()">Ver resultados</button>
+        </form>
+        <p id="resultado_test"></p>
+        <ul id="consejos"></ul>
+    </section>
+    <footer>
+        <p>&copy; 2025 Ecolator - Conciencia Ambiental</p>
+    </footer>
+    <script>
+        function calcularResultados() {
+            let respuestas = document.querySelectorAll('input[type=radio]:checked');
+            let consejos = [];
+            
+            let consejosMap = {
+                'q1': "Reduce el consumo de agua cerrando el grifo cuando no lo necesites y usando sistemas de captación de agua de lluvia.",
+                'q2': "Usa transporte público, camina o usa bicicleta para reducir emisiones de carbono.",
+                'q3': "Clasifica los residuos correctamente para facilitar el reciclaje y reducir desperdicios.",
+                'q4': "Siempre lleva bolsas reutilizables para evitar el uso de plásticos de un solo uso.",
+                'q5': "Opta por productos con envases reciclables o biodegradables para reducir el impacto ambiental.",
+                'q6': "Apaga las luces y usa focos LED para ahorrar energía y reducir la huella de carbono.",
+                'q7': "Reducir el consumo de carne ayuda a disminuir la contaminación y el uso excesivo de agua.",
+                'q8': "Usar electrodomésticos con certificación energética A+ o superior reduce el consumo eléctrico.",
+                'q9': "Elimina el plástico de un solo uso y prefiere alternativas reutilizables como botellas de acero inoxidable."
+            };
+            
+            respuestas.forEach(respuesta => {
+                if (consejosMap[respuesta.name]) {
+                    consejos.push(consejosMap[respuesta.name]);
+                }
+            });
+            
+            let listaConsejos = document.getElementById('consejos');
+            listaConsejos.innerHTML = "";
+            consejos.forEach(consejo => {
+                let li = document.createElement('li');
+                li.textContent = consejo;
+                listaConsejos.appendChild(li);
+            });
+            
+            document.getElementById('resultado_test').textContent = consejos.length === 0 ? "¡Felicidades! Tus hábitos son muy ecológicos." : "Aquí tienes algunos consejos para mejorar:";
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecolator - Conciencia Ambiental</title>
+    <link rel="stylesheet" href="static\css\styles.css">
+</head>
+<body>
+    <header>
+        <h1>Ecolator</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home')}}">Inicio</a></li>
+                <li><a href="{{ url_for('calculadora_energia') }}">Calculadora de Energía</a></li>
+                <li><a href="{{ url_for('calculadora_agua') }}">Calculadora de Agua</a></li>
+                <li><a href="{{ url_for('comparador_energia') }}">Comparador de Energía</a></li>
+                <li><a href="{{ url_for('test_ambiental') }}">Test Ambiental</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h2>Descubre tu impacto ambiental</h2>
+        <p>Usa nuestras herramientas interactivas para calcular tu consumo de recursos y aprender a reducir tu huella ecologica</p>
+        <a href="{{ url_for('test_ambiental') }}" class="btn">Realizar el Test Ambiental</a>
+    </section>
+    
+    <section class="features">
+        <div class="feature">
+            <h3>Calculadora de Energia</h3>
+            <p>Conoce cuanta energia consumes y como reducir tu impacto</p>
+            <a href="{{ url_for('calculadora_energia') }}" class="btn">Calcular</a>
+        </div>
+        <div class="feature">
+            <h3>Calculadora de Agua</h3>
+            <p>Descubre si estas usando mas agua de la necesaria</p>
+            <a href="{{ url_for('calculadora_agua') }}" class="btn">Calcular</a>
+        </div>
+        <div class="feature">
+            <h3>Comparador de Energia</h3>
+            <p>Compara el impacto de diferentes fuentes de enrgia</p>
+            <a href="{{ url_for('comparador_energia') }}" class="btn">Comparar</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ecolator - Conciencia Ambiental</p>
+    </footer>
+</body>
+</html>

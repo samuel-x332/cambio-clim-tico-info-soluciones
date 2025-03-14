@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Energía - Ecolator</title>
+    <link rel="stylesheet" href="static\css\styles.css">
+</head>
+<body>
+    <header>
+        <h1>Calculadora de Energía</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Inicio</a></li>
+                <li><a href="{{ url_for('calculadora_agua') }}">Calculadora de Agua</a></li>
+                <li><a href="{{ url_for('comparador_energia') }}">Comparador de Energía</a></li>
+                <li><a href="{{ url_for('test_ambiental') }}">Test Ambiental</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Calcula tu consumo de energía</h2>
+        <p>Introduce el uso aproximado de tus electrodomésticos para conocer tu impacto ambiental.</p>
+        
+        <form id="energyForm">
+            <div class="input-group">
+                <label for="horasTV">Horas diarias de TV:</label>
+                <input type="number" id="horasTV" name="horasTV" min="0">
+            </div>
+            
+            <div class="input-group">
+                <label for="horasPC">Horas diarias de computadora:</label>
+                <input type="number" id="horasPC" name="horasPC" min="0">
+            </div>
+            
+            <div class="input-group">
+                <label for="horasLuces">Horas diarias con luces encendidas:</label>
+                <input type="number" id="horasLuces" name="horasLuces" min="0">
+            </div>
+            
+            <button type="button" onclick="calcularEnergia()">Calcular Consumo</button>
+        </form>
+
+        <h3>Resultado:</h3>
+        <p id="resultado_energia"></p>
+        <ul id="consejos_energia"></ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ecolator - Conciencia Ambiental</p>
+    </footer>
+
+    <script>
+        function calcularEnergia() {
+            let tv = parseInt(document.getElementById('horasTV').value) || 0;
+            let pc = parseInt(document.getElementById('horasPC').value) || 0;
+            let luces = parseInt(document.getElementById('horasLuces').value) || 0;
+
+            let consumoTotal = (tv * 0.1) + (pc * 0.2) + (luces * 0.05);
+            document.getElementById('resultado_energia').textContent = `Tu consumo aproximado es de ${consumoTotal.toFixed(2)} kWh al día.`;
+
+            let consejos = [];
+            if (tv > 4) consejos.push("Reduce el tiempo de uso del televisor o usa modelos de bajo consumo.");
+            if (pc > 6) consejos.push("Apaga tu computadora cuando no la uses o activa el modo de ahorro de energía.");
+            if (luces > 8) consejos.push("Utiliza focos LED y apaga las luces en habitaciones vacías.");
+
+            let listaConsejos = document.getElementById('consejos_energia');
+            listaConsejos.innerHTML = "";
+            consejos.forEach(consejo => {
+                let li = document.createElement('li');
+                li.textContent = consejo;
+                listaConsejos.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
